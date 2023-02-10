@@ -50,6 +50,10 @@ The following is needed to run tests: N/A
 
 If you have any questions about the repository contact the contributors directly at:
 
-Calvin Chern: [Email](mailto:calvin.chern24@gmail.com) or  [Github](<https://github.com/cchern>)
+### Calvin Chern:
 
-Laura Trapaga: [Email](mailto:trapaga9@gmail.com) [Github](<https://github.com/ltrapaga>)
+[Email](mailto:calvin.chern24@gmail.com) | [Github](<https://github.com/cchern>)
+
+### Laura Trapaga:
+
+[Email](mailto:trapaga9@gmail.com) | [Github](<https://github.com/ltrapaga>)
