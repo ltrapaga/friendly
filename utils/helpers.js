@@ -6,17 +6,17 @@ module.exports = {
     return string.charAt(0).toUpperCase() + string.slice(1);
   },
   format_time: (time) => {
-    return new Date(time).toLocaleString("en-US", {
+    return new Date(time).toLocaleString('en-US', {
       hour12: true,
-      hourCycle: "h12",
-      hour: "numeric",
-      minute: "2-digit",
+      hourCycle: 'h12',
+      hour: 'numeric',
+      minute: '2-digit',
     });
   },
   get_chat_class: (senderId, currentId) => {
     if (senderId !== currentId) {
-      return "received";
+      return 'received';
     }
-    return "sent";
+    return 'sent';
   },
 };
