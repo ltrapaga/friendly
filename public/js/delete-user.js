@@ -1,8 +1,8 @@
 async function deleteTheUser() {
-    // creating a logout button for the User
+    // acquiring logout button element 
     const logoutButton = document.getElementById('logout-btn');
 
-    // creating a button to generate randomization of a new friend
+    // acquiring random button element
     const liveUserId = parseInt(
         document.querySelector('#random-btn').getAttribute('user-data')
     );
@@ -20,5 +20,5 @@ async function deleteTheUser() {
     }
 
 }
-// creating a delete button for the User
+// acquiring delete button element 
 document.querySelector('#delete-btn').addEventListener('click', deleteTheUser)
