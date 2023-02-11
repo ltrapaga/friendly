@@ -13,6 +13,7 @@ async function deleteTheUser() {
         headers: { 'Content-Type': 'application/json' }
     });
 
+    // function to log out the user once the User account is deleted
     if (userResponse.ok) {
         logoutButton.click();
     } else {
