@@ -1,0 +1,51 @@
+<div class="register-page">
+    <div class="forms">
+        <form class="registerInform">
+            <div>
+                <label for='email-register'>Email:</label>
+                <input type='text' id='email-register' />
+            </div>
+            <div>
+                <label for='password-register'>Password:</label>
+                <input type='password' id='password-register' autocomplete='no' />
+            </div>
+            <div>
+                <label for='firstname-register'>First Name:</label>
+                <input type='text' id='firstname-register' />
+            </div>
+            <div>
+                <label for='lastname-register'>Last Name:</label>
+                <input type='text' id='lastname-register' />
+            </div>
+            <div>
+                <label for='gender'>Gender:</label>
+                <select name='genders' id='genders'>
+                    <option value='female'>Female</option>
+                    <option value='male'>Male</option>
+                    <option value='non-binary'>Non-Binary</option>
+                    <option value='undisclosed'>Undisclosed</option>
+                </select>
+            </div>
+
+            <div>
+                <label for='pronoun'>Pronouns:</label>
+                <input type='text' id='pronouns' />
+            </div>
+\
+
+            <div>
+                <label for='biography'>Bio:</label>
+                <textarea id='biography' rows='10' cols='50' placeholder='Describe yourself and what you are looking for.'></textarea>
+            </div>
+            <div>
+                <button type='submit'>Sign Up</button>
+            </div>
+        </form>
+        <div class="form-message">
+            If you have an account, 
+            <a href="/login">click here to login!</a>
+        </div>
+    </div>
+</div>
+
+<script src='/public/js/register-user.js'></script>
