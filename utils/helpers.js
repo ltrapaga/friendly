@@ -13,7 +13,7 @@ module.exports = {
       minute: '2-digit',
     });
   },
-  get_chat_class: (senderId, currentId) => {
+  acquireChat: (senderId, currentId) => {
     if (senderId !== currentId) {
       return 'received';
     }
