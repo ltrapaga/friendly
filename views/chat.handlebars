@@ -1,0 +1,36 @@
+<div class="logged-in">
+    <header>
+
+        {{!-- 
+        <div class="logo">
+            <a href="'"
+        </div> 
+        --}}
+
+        {{!-- Dashboard Welcome introduction --}}
+        <div class="user-welcome">
+            {{#with userLatest.currentUser}}
+            Welcome, {{capitalize_first_name first_name}}.
+            <i class="fa-solid fa-circle-user"></i>
+            {{/with}}
+        
+        <div class="user-choices">
+            <ul>
+                <li><button id="logout-btn">Sign Out</button></li>
+                <li><button id="delete-btn">Delete My Account</button></li>
+            </ul>
+        </div>
+        </div>
+
+        {{!-- Recent chat list when viewing from mobile --}}
+
+
+<script src='/assets/js/logout.js'></script>
+<script src='/assets/js/delete-user.js'></script>
+            
+            
+            
+            
+            
+            
+    

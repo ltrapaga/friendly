@@ -48,20 +48,10 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    
-    // sexual_preference: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false
-    // },
-    
     pronouns: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    // birthday: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false
-    // }
   },
   {
     hooks: {
