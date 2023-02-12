@@ -43,8 +43,8 @@
         </div>
         
       {{else}}
-        <!-- If on a specified chatter page, display the conversation -->
-        <!-- About the user you are chatting with -->
+        <!-- showing the conversation once interacting with the user -->
+        <!-- shows the information of the other user you are speaking to -->
         <div class='userInform'>
           <p class='inTheChat'>You are chatting with</p>
           {{#with recentUserchat.currentChatter as |user|}}
@@ -57,7 +57,7 @@
           {{/with}}
         </div>
 
-        <!-- Conversation messages -->
+        <!-- messages between conversations -->
         <div class='messages'>
           <ol id='chat-messages'>
             {{#each messages}}
@@ -69,7 +69,7 @@
           </ol>
         </div>
 
-        <!-- Send message input -->
+        <!-- messages that are sent information -->
         <form class='send-message'>
           {{#with recentUserchat.currentChatter as |user|}}
             <input type='text' id='message'
