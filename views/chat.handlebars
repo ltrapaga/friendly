@@ -17,27 +17,25 @@
         </div>
 <!-- For mobile view to access recent chat list -->
     <div class='open-toggle'>
-      <a href='#recent-chat-list'>
-        <i class='fa-solid fa-clock'></i>
-        <i class='fa-solid fa-message'></i>
+      <a href='#currentChatList'>
       </a>
     </div>
   </header>
 
   <!-- Main Body -->    
   <main>
-    <!-- Recent Chat List -->
-    <div class='recent-chat' id='recent-chat-list'>
+    <!-- The recent chat list of users -->
+    <div class='currentChat' id='currentChatList'>
       <ul id='recent-list'></ul>
-      <a href='#' class='close-toggle'><i class='fa-solid fa-xmark'></i></a>
+      <a href='#' class='close-toggle'></a>
     </div>
     <script src='/assets/js/recent.js'></script>
 
-    <!-- Current Chat View -->
+    <!-- The current chat list of the user -->
     <div class='current-chat'>
       {{#if chatHome}}
-        <!-- If on the chat home, display randomize button -->
-        <div class='chat-home'>
+        <!-- if during the home chat, display the randomization button -->
+        <div class='homeChat'>
           {{#with recentUserchat.thisUser}}
             <button id='random-btn' user-data='{{id}}'>Randomize a new chat</button>
           {{/with}}
@@ -45,33 +43,33 @@
         </div>
         
       {{else}}
-        <!-- If on a specified chatter page, display the conversation -->
-        <!-- About the user you are chatting with -->
-        <div class='user-info'>
-          <p class='in-chat'>You're in a chat with</p>
+        <!-- showing the conversation once interacting with the user -->
+        <!-- shows the information of the other user you are speaking to -->
+        <div class='userInform'>
+          <p class='inTheChat'>You are chatting with</p>
           {{#with recentUserchat.currentChatter as |user|}}
             <h2 class='chatter-name'>{{capitalize_first_name user.first_name}}
               {{last_name_initial user.last_name}}</h2>
-            <p class='chatter-info'>{{user.pronouns}},
+            <p class='userProGen'>{{user.pronouns}},
               {{user.gender}},
             </p>
-            <p class='chatter-bio'>{{user.bio}}</p>
+            <p class='userBiography'>{{user.bio}}</p>
           {{/with}}
         </div>
 
-        <!-- Conversation messages -->
+        <!-- messages between conversations -->
         <div class='messages'>
           <ol id='chat-messages'>
             {{#each messages}}
-              <li class='{{get_chat_class sender_id ../recentUserchat.thisUser.id}}'>
+              <li class='{{acquireChat sender_id ../recentUserchat.thisUser.id}}'>
                 <div class='message'>{{text_messages}}</div>
-                <p class='sent-time'>{{format_time developIn}}</p>
+                <p class='timeSent'>{{format_time developIn}}</p>
               </li>
             {{/each}}
           </ol>
         </div>
 
-        <!-- Send message input -->
+        <!-- messages that are sent information -->
         <form class='send-message'>
           {{#with recentUserchat.currentChatter as |user|}}
             <input type='text' id='message'
