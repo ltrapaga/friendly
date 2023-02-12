@@ -1,0 +1,21 @@
+<div class="logged-in">
+    <header>
+
+        {{!-- Dashboard Welcome introduction --}}
+        <div class="user-welcome">
+            {{#with userLatest.currentUser}}
+            Welcome, {{capitalize_first_name first_name}}.
+            <i class="fa-solid fa-circle-user"></i>
+            {{/with}}
+        
+        <div class="user-choices">
+            <ul>
+                <li><button id="logout-btn">Sign Out</button></li>
+                <li><button id="delete-btn">Delete My Account</button></li>
+            </ul>
+        </div>
+        </div>
+
+
+<script src='/assets/js/logout.js'></script>
+<script src='/assets/js/delete-user.js'></script>
