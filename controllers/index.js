@@ -1,11 +1,18 @@
 const router = require('express').Router();
-const { Message, User } = require('../models');
+const { User, Message } = require('../models');
+const { Op } = require('sequelize');
 
+var sessionId = 1;
+var para
 router.get('/chat', async (req, res) => {
   try {
     const messageData = await Message.findAll({
+      where: { recipient_id: sessionId},
       attributes: ['id', 'sender_id', 'recipient_id', 'text_message'],
-    });
+      },
+      // Display all messages in order by message id
+      //order: [['id']]
+    )
     // Get all projects and JOIN with user data
     const userData = await User.findAll({
       attributes: ['id', 'first_name', 'last_name'],

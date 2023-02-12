@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // const sess = {
 //   secret: process.env.DB_SECRET,
@@ -26,7 +26,7 @@ const io = require('socket.io')(server);
 //   }),
 // };
 
-//app.use(session(sess));
+// app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
