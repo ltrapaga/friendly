@@ -1,87 +1,90 @@
-<div class="logged-in">
-    <header>
+<div class='logged-in'>
+  <!-- Header -->
+  <header>
+    <!-- Logo image -->
+    <div class='logo'>
 
-        {{!-- Dashboard Welcome introduction --}}
-        <div class="user-welcome">
-            {{#with recentUserchat.thisUser}}
-            Welcome, {{capitalize_first_name first_name}}.
-            <i class="fa-solid fa-circle-user"></i>
-            {{/with}}
-        
-        <div class="user-choices">
-            <ul>
-                <li><button id="logout-btn">Sign Out</button></li>
-                <li><button id="delete-btn">Delete My Account</button></li>
-            </ul>
-        </div>
-        </div>
-<!-- For mobile view to access recent chat list -->
+    </div>
+    {{!-- Dashboard Welcome introduction --}}
+    <div class='welcome-info'>
+      {{#with recentUserchat.thisUser}}
+      Welcome, {{capitalize_first_name first_name}}!
+      <a href='/chat'><img src='/assets/images/logo-light.svg' alt='randm logo' /></a>
+      {{/with}}
+      <!-- Logout and Delete buttons -->
+      <div class='user-options'>
+        <ul>
+          <li><button id='logout-btn'>Sign Out</button></li>
+          <li><button id='delete-btn'>Delete My Account</button></li>
+        </ul>
+      </div>
+    </div>
+    <!-- chat list during mobile view -->
     <div class='open-toggle'>
-      <a href='#currentChatList'>
+      <a href='#currenChatList'>
+
       </a>
     </div>
   </header>
 
-  <!-- Main Body -->    
   <main>
-    <!-- The recent chat list of users -->
-    <div class='currentChat' id='currentChatList'>
-      <ul id='recent-list'></ul>
+    <!-- chat list of recent users -->
+    <div class='currentChat' id='currenChatList'>
+      <ul id='recentUserList'></ul>
       <a href='#' class='close-toggle'></a>
     </div>
     <script src='/assets/js/recent.js'></script>
 
-    <!-- The current chat list of the user -->
+    <!-- current chat list -->
     <div class='current-chat'>
       {{#if chatHome}}
-        <!-- if during the home chat, display the randomization button -->
-        <div class='homeChat'>
-          {{#with recentUserchat.thisUser}}
-            <button id='random-btn' user-data='{{id}}'>Randomize a new chat</button>
-          {{/with}}
-          <script src='/assets/js/random-chat.js'></script>
-        </div>
-        
+      <!-- rnadomize display when on home chat view -->
+      <div class='homeChat'>
+        {{#with recentUserchat.thisUser}}
+        <button id='random-btn' user-Data='{{id}}'>Talk with someone new!</button>
+        {{/with}}
+        <script src='/assets/js/random-chat.js'></script>
+      </div>
+
       {{else}}
-        <!-- showing the conversation once interacting with the user -->
-        <!-- shows the information of the other user you are speaking to -->
-        <div class='userInform'>
-          <p class='inTheChat'>You are chatting with</p>
-          {{#with recentUserchat.currentChatter as |user|}}
-            <h2 class='chatter-name'>{{capitalize_first_name user.first_name}}
-              {{last_name_initial user.last_name}}</h2>
-            <p class='userProGen'>{{user.pronouns}},
-              {{user.gender}},
-            </p>
-            <p class='userBiography'>{{user.bio}}</p>
-          {{/with}}
-        </div>
+      <!-- showing the conversation once interacting with the user -->
+      <!-- shows the information of the other user you are speaking to -->
+      <div class='userInform'>
+        <p class='inTheChat'>You are chatting with</p>
+        {{#with recentUserchat.chatRightNow as |user|}}
+        <h2 class='chatter-name'>{{capitalize_first_name user.first_name}}
+          {{capatilize_last_name user.last_name}}</h2>
+        <p class='userProGen'>{{user.pronouns}},
+          {{user.gender}},
+        </p>
+        <p class='userBiography'>{{user.bio}}</p>
+        {{/with}}
+      </div>
 
-        <!-- messages between conversations -->
-        <div class='messages'>
-          <ol id='chat-messages'>
-            {{#each messages}}
-              <li class='{{acquireChat sender_id ../recentUserchat.thisUser.id}}'>
-                <div class='message'>{{text_messages}}</div>
-                <p class='timeSent'>{{format_time createdAt}}</p>
-              </li>
-            {{/each}}
-          </ol>
-        </div>
+      <!-- messages between users -->
+      <div class='messages'>
+        <ol id='chatMsg'>
+          {{#each messages}}
+          <li class='{{acquireChat sender_id ../recentUserchat.thisUser.id}}'>
+            <div class='message'>{{text_messages}}</div>
+            <p class='timeSent'>{{format_time createdAt}}</p>
+          </li>
+          {{/each}}
+        </ol>
+      </div>
 
-        <!-- messages that are sent information -->
-        <form class='send-message'>
-          {{#with recentUserchat.currentChatter as |user|}}
-            <input type='text' id='message'
-              placeholder='Send a message to {{user.first_name}}...' />
-          {{/with}}
+      <!-- sent messages -->
+      <form class='send-message'>
+        {{#with recentUserchat.chatRightNow as |user|}}
+        <input type='text' id='message' placeholder='Send a message to {{user.first_name}}...' />
+        {{/with}}
 
-          {{#with recentUserchat.thisUser}}
-            <button type='submit' id='send-message-btn' user-data='{{id}}'>Send</button>
-          {{/with}}
-        </form>
-        <script src='/assets/js/message.js'></script>
-        <script src='/assets/js/socket.js'></script>
+        {{#with recentUserchat.thisUser}}
+        <button type='submit' id='send-message-btn' user-Data='{{id}}'>Send</button>
+        {{/with}}
+      </form>
+      <script src='/assets/js/message.js'></script>
+      <script src='/assets/js/socket.js'></script>
       {{/if}}
     </div>
   </main>

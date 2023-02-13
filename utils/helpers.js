@@ -10,11 +10,11 @@ module.exports = {
       hour12: true,
       hourCycle: 'h12',
       hour: 'numeric',
-      minute: '2-digit',
+      minute: '2-digit'
     });
   },
-  acquireChat: (sendUserId, currentId) => {
-    if (sendUserId !== currentId) {
+  acquireChat: (sendUserId, atmID) => {
+    if (sendUserId !== atmID) {
       return 'received';
     }
     return 'sent';

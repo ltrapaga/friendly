@@ -1,24 +1,27 @@
-<div class="register-page">
-    <div class="forms">
-        <form class="registerInform">
+<div class='unlogged-page'>
+    <div class='logo'>
+
+    </div>
+    <div class='forms'>
+        <form class='registerInform'>
             <div>
-                <label for='register-email'>Email:</label>
-                <input type='text' id='register-email' />
+                <label for='registerEmail'>Email:</label>
+                <input type='text' id='registerEmail' />
             </div>
             <div>
-                <label for='register-password'>Password:</label>
-                <input type='password' id='register-password' autocomplete='no' />
+                <label for='registerPwd'>Password:</label>
+                <input type='password' id='registerPwd' autocomplete='no' />
             </div>
             <div>
-                <label for='register-firstname'>First Name:</label>
-                <input type='text' id='register-firstname' />
+                <label for='registerFirstname'>First Name:</label>
+                <input type='text' id='registerFirstname' />
             </div>
             <div>
-                <label for='register-lastname'>Last Name:</label>
-                <input type='text' id='register-lastname' />
+                <label for='registerLastname'>Last Name:</label>
+                <input type='text' id='registerLastname' />
             </div>
             <div>
-                <label for='gender'>Gender:</label>
+                <label for='gender'>Gender Identity:</label>
                 <select name='genders' id='genders'>
                     <option value='female'>Female</option>
                     <option value='male'>Male</option>
@@ -26,24 +29,21 @@
                     <option value='undisclosed'>Undisclosed</option>
                 </select>
             </div>
-
             <div>
                 <label for='pronoun'>Pronouns:</label>
                 <input type='text' id='pronouns' />
             </div>
-\
-
             <div>
-                <label for='biography'>Bio:</label>
-                <textarea id='biography' rows='10' cols='50' placeholder='Write a little about yourself and what you are looking for in a new friendship.'></textarea>
+                <label for='bio'>Bio:</label>
+                <textarea id='bio' rows='10' cols='50'
+                    placeholder='Write a little about yourself and what you are looking for in a new friendship.'></textarea>
             </div>
             <div>
-                <button type='submit'>Create an account</button>
+                <button type='submit'>Create account</button>
             </div>
         </form>
-        <div class="form-message">
-            Already have an account?
-            <a href="/login">Click here to login!</a>
+        <div class='form-message'>
+            <a href='/login'>Login here!</a>
         </div>
     </div>
 </div>
