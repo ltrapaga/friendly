@@ -1,25 +1,21 @@
-async function deleteTheUser() {
-    // acquiring logout button element 
+async function deleteUserForm() {
     const logoutButton = document.getElementById('logout-btn');
-
-    // acquiring random button element
-    const liveUserId = parseInt(
-        document.querySelector('#random-btn').getAttribute('user-data')
+  
+    const thisUserId = parseInt(
+      document.querySelector('#random-btn').getAttribute('user-Data')
     );
-
-    // fetching api to delete user
-    const userResponse = await fetch('/api/users/' + liveUserId, {
-        method: 'delete',
-        headers: { 'Content-Type': 'application/json' }
+  
+    const response = await fetch('/api/users/' + thisUserId, {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' }
     });
-
-    // function to log out the user once the User account is deleted
-    if (userResponse.ok) {
-        logoutButton.click();
+  
+    // logging out user when deleted
+    if (response.ok) {
+      logoutButton.click(); 
     } else {
-        alert(userResponse.statusText)
+      alert(response.statusText);
     }
-
-}
-// acquiring delete button element 
-document.querySelector('#delete-btn').addEventListener('click', deleteTheUser)
+  }
+  
+  document.querySelector('#delete-btn').addEventListener('click', deleteUserForm);

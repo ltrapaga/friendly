@@ -63,7 +63,7 @@
             {{#each messages}}
               <li class='{{acquireChat sender_id ../recentUserchat.thisUser.id}}'>
                 <div class='message'>{{text_messages}}</div>
-                <p class='timeSent'>{{format_time developIn}}</p>
+                <p class='timeSent'>{{format_time createdAt}}</p>
               </li>
             {{/each}}
           </ol>

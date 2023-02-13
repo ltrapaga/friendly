@@ -1,107 +1,101 @@
-let atmID = 0;
-let webID = 0;
+let atmId = 0;
+let webId = 0;
 
-const socket = io(); // SOCKET.IO
+const socket = io(); 
 
-// On submit button click, get information about the user who is sending a message
+// after clicking the submit button, the user will obtain information of the other user
 document.querySelector('.send-message').addEventListener('submit', (event) => {
     event.preventDefault();
 
-    // Get id of message recipient
-    webID = document.location.href.split('/');
-    webID = webID[webID.length - 1].split('#')[0];
-    if (webID.includes('?')) {
-        webID = webID.split('?')[0];
+    // obtaining id of the recipient
+    webId = document.location.href.split('/');
+    webId = webId[webId.length - 1].split('#')[0];
+    if (webId.includes('?')) {
+        webId = webId.split('?')[0];
     }
 
-    // Get id of current user
-    atmID = document
+    // obtaining id of the current user
+    atmId = document
         .querySelector('#send-message-btn')
-        .getAttribute('user-data');
+        .getAttribute('user-Data');
 
-    // If there is no message, do not continue
     if (document.querySelector('#message').value.trim() === '') {
         return;
     }
-    // Emit the following information
+    // Emitting informtation
     socket.emit('new message', {
         message: document.querySelector('#message').value,
-        from: atmID,
-        to: webID
+        from: atmId,
+        to: webId
     });
 });
 
-// Socket on taking in the information from the emit
 socket.on('new message', (data) => {
-    // Message text content
+    // content of messages
     const message = data.message;
-    // Ids of sender and recipient
     const fromUserId = data.from;
     const toUserId = data.to;
-    // Get id of the user currently logged in (across all users on the page)
     const sendUserId = document
         .querySelector('#send-message-btn')
-        .getAttribute('user-data');
-    // Get id of the recipient (across all users on the page)
+        .getAttribute('user-Data');
+
     let webUrlPage = document.location.href.split('/');
     webUrlPage = webUrlPage[webUrlPage.length - 1].split('#')[0];
+
     if (webUrlPage.includes('?')) {
         webUrlPage = webUrlPage.split('?')[0];
     }
 
-    // Live update of the recent message display
-    const currentMsgList = document.querySelector('#recent-list');
+    // live interaction of messages between users
+    const currentMsgList = document.querySelector('#recentUserList');
 
     if (fromUserId == sendUserId) {
-        let toRecentChatDiv = document.querySelector(`#user-${toUserId}`);
-        // if div exists remove before adding to page
-        if (toRecentChatDiv) {
-            toRecentChatDiv.parentElement.removeChild(toRecentChatDiv);
+        let toChatUser = document.querySelector(`#user-${toUserId}`);
+        // remove div before added to the webpage
+        if (toChatUser) {
+            toChatUser.parentElement.removeChild(toChatUser);
         }
-        // If the message is sent by current user
-        let toNewRecentChatDiv = document.createElement('li');
-        toNewRecentChatDiv.setAttribute('id', `user-${toUserId}`);
 
-        toNewRecentChatDiv.innerHTML = `<a href="/chat/${toUserId}"><div><h3 class="name">
+        let newToChatUser = document.createElement('li');
+        newToChatUser.setAttribute('id', `user-${toUserId}`);
+
+        newToChatUser.innerHTML = `<a href="/chat/${toUserId}"><div><h3 class="name">
         ${document.querySelector('.chatter-name').textContent}
         </h3><span class="latest-message">${message}</span></div></a>`;
 
-        currentMsgList.insertBefore(toNewRecentChatDiv, currentMsgList.children[0]);
+        currentMsgList.insertBefore(newToChatUser, currentMsgList.children[0]);
 
-        // Put on top of the list
+        // Put at topmost list 
     } else if (toUserId == sendUserId) {
-        let fromRecentChatDiv = document.querySelector(`#user-${fromUserId}`);
-        // if div exists remove before adding to page
-        if (fromRecentChatDiv) {
-            fromRecentChatDiv.parentElement.removeChild(fromRecentChatDiv);
+        let fromChatUser = document.querySelector(`#user-${fromUserId}`);
+        // remove div before added to the webpage
+        if (fromChatUser) {
+            fromChatUser.parentElement.removeChild(fromChatUser);
         }
-        // If the message is sent by current user
-        let fromNewRecentChatDiv = document.createElement('li');
-        fromNewRecentChatDiv.setAttribute('id', `user-${fromUserId}`);
+  
+        let newFromChatUser = document.createElement('li');
+        newFromChatUser.setAttribute('id', `user-${fromUserId}`);
 
-        fromNewRecentChatDiv.innerHTML = `<a href="/chat/${fromUserId}"><div><h3 class="name">
+        newFromChatUser.innerHTML = `<a href="/chat/${fromUserId}"><div><h3 class="name">
         ${document.querySelector('.chatter-name').textContent}
         </h3><span class="latest-message">${message}</span></div></a>`;
 
-        currentMsgList.insertBefore(fromNewRecentChatDiv, currentMsgList.children[0]);
+        currentMsgList.insertBefore(newFromChatUser, currentMsgList.children[0]);
     }
 
 
-    // Live update of messages
+
     if (
-        // If message is sent by current user AND the recipient is in the url
-        (fromUserId == sendUserId && toUserId == webUrlPage) ||
-        // OR message is sent by the user in the page url AND the recipient is current user
-        (fromUserId == webUrlPage && toUserId == sendUserId)
+        (fromUserId == sendUserId && toUserId == webUrlPage) || (fromUserId == webUrlPage && toUserId == sendUserId)
     ) {
-        // Gets class name for message display depending on who sent/received
-        const messageClass = (sendUserId, fromUserId) => {
+        // received vs sent display
+        const classMsg = (sendUserId, fromUserId) => {
             if (sendUserId != fromUserId) {
                 return 'received';
             }
             return 'sent';
         };
-        // Get time at message send
+        // time message was sent
         function msgTime() {
             return new Date().toLocaleString('en-US', {
                 hour12: true,
@@ -111,19 +105,18 @@ socket.on('new message', (data) => {
             });
         }
 
-        // Create list element with the message and send time
-        let messageLi = document.createElement('li');
-        messageLi.className = messageClass(sendUserId, fromUserId);
-        messageLi.innerHTML = `<div class="message">${message}</div>
+        // listing message and sent time
+        let liMsg = document.createElement('li');
+        liMsg.className = classMsg(sendUserId, fromUserId);
+        liMsg.innerHTML = `<div class="message">${message}</div>
       <p class="timeSent">${msgTime()}</p>`;
 
-        // Append to chat messages list
-        document.querySelector('#chat-messages').appendChild(messageLi);
+        document.querySelector('#chatMsg').appendChild(liMsg);
 
-        // Clear message input text box
+        // Clear messages
         document.querySelector('#message').value = '';
     }
-    // Reset atmID and pageId once message is sent and page displays message
-    atmID = 0;
-    webID = 0;
+    // Resettting atmId and webId once the message is sent and the page shows the message
+    atmId = 0;
+    webId = 0;
 });
