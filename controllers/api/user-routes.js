@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { User, Message } = require('../../models');
 
-// Get all users
+// Get request for every user
 router.get('/', (req, res) => {
     User.findAll({
-            attributes: { exclude: ['password', 'email', 'birthday'] }
+            attributes: { exclude: ['password', 'email'] }
         })
         .then((dbUserData) => res.json(dbUserData))
         .catch((err) => {
@@ -13,15 +13,15 @@ router.get('/', (req, res) => {
         });
 });
 
-// Find one user by id
+// get request for single user
 router.get('/:id', (req, res) => {
     User.findOne({
             where: { id: req.params.id },
-            attributes: { exclude: ['password', 'email', 'birthday'] }
+            attributes: { exclude: ['password', 'email'] }
         })
         .then((dbUserData) => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No user found with this id' });
+                res.status(404).json({ message: 'Could not find user with this ID' });
                 return;
             }
             res.json(dbUserData);
@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// Add user to database on register
+// post request to add user once registered
 router.post('/', (req, res) => {
     User.create(req.body)
         .then((dbUserData) => {
@@ -44,24 +44,23 @@ router.post('/', (req, res) => {
         });
 });
 
-// Login verification post route to /login endpoint
+// post request for verification for login
 router.post('/login', (req, res) => {
-    // Expects: {"email": "myemail@email.com", "password": "password1234"}
     User.findOne({
         where: { email: req.body.email }
     }).then((dbUserData) => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user found with that email address' });
+            res.status(400).json({ message: 'Could not find user with that email address' });
             return;
         }
 
-        // Check password validity
-        const validPassword = dbUserData.checkPassword(req.body.password);
-        if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect password' });
+        // Valid password
+        const acceptedPwd = dbUserData.checkPassword(req.body.password);
+        if (!acceptedPwd) {
+            res.status(400).json({ message: 'Wrong password' });
             return;
         }
-        // Save session data and set status to loggedIn true
+        // saving the session once logged in
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
             req.session.email = dbUserData.email;
@@ -72,7 +71,7 @@ router.post('/login', (req, res) => {
     });
 });
 
-// Destroy the session on logout
+// Destroy session once logged out
 router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
@@ -83,7 +82,7 @@ router.post('/logout', (req, res) => {
     }
 });
 
-// Delete a user by id
+// deleting the user based off ID
 router.delete('/:id', (req, res) => {
     User.destroy({
             where: {
@@ -92,7 +91,7 @@ router.delete('/:id', (req, res) => {
         })
         .then((dbUserData) => {
             if (!dbUserData) {
-                res.status(404).json({ message: 'No user found with this id' });
+                res.status(404).json({ message: 'Could not find user with this id' });
                 return;
             }
             res.json(dbUserData);

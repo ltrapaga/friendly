@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { User, Message } = require('../../models');
 const { Op } = require('sequelize');
-const { recentUserchat } = require('../../utils/filters');
+const { getrecentUserchat } = require('../../utils/filters');
 
-// Get request to receive all messages once logged in
+// get request to receive all messages once logged in
 router.get('/', (req, res) => {
-  // If not logged in, redirect to login page
+  // redirect to the login page if the user is not logged in
   if (!req.session.loggedIn) {
     res.redirect('/login');
     return;
@@ -13,35 +13,33 @@ router.get('/', (req, res) => {
   var sessionId = req.session.user_id;
   Message.findAll({
     where: {
-      // If receiver id OR sender id = session id
       [Op.or]: [{ recipient_id: sessionId }, { sender_id: sessionId }]
     },
     attributes: ['id', 'text_messages', 'createdAt'],
     include: [
       {
-        // Includes message sender
+        // sender messages
         model: User,
         as: 'sender',
         attributes: ['id', 'first_name', 'last_name']
       },
       {
-        // Includes message receiver
+        // recipient messages
         model: User,
         as: 'receiver',
         attributes: ['id', 'first_name', 'last_name']
       }
     ]
   })
-    .then((dbMessageData) => res.json(dbMessageData))
+    .then((dbmessageIE) => res.json(dbmessageIE))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-// Get recent messages
+// Recent User Messages
 router.get('/recent', (req, res) => {
-  // If not logged in, redirect to login page
   if (!req.session.loggedIn) {
     res.redirect('/login');
     return;
@@ -49,52 +47,47 @@ router.get('/recent', (req, res) => {
   var sessionId = req.session.user_id;
   Message.findAll({
     where: {
-      // If receiver id OR sender id = session id
       [Op.or]: [{ recipient_id: sessionId }, { sender_id: sessionId }]
     },
     order: [['createdAt', 'DESC']]
   })
-    .then((dbMessageData) => {
-      // Find all users
+    .then((dbmessageIE) => {
+      // Finding every user
       User.findAll({
         attributes: ['id', 'first_name', 'last_name']
       })
         .then((dbUserData) => {
-          // Map users for plain javascript of data
+          // mapping users to get their data
           const user = dbUserData.map((user) => user.get({ plain: true }));
-
-          // Map messages for plain javascript of data
-          const messages = dbMessageData.map((message) =>
+          const messages = dbmessageIE.map((message) =>
             message.get({ plain: true })
           );
 
-          // Gets latest chat message for every conversation user has
-          let recentUser = recentUserchat(messages, user, sessionId);
+          // getting the latest message for each user
+          let recentUserchat = getrecentUserchat(messages, user, sessionId);
 
-          res.json(recentUser.arrayRecentChat);
+          res.json(recentUserchat.updatedChat);
         })
-        // Error catch for User.findAll
         .catch((err) => {
           console.log(err);
           res.status(500).json(err);
         });
     })
-    // Error catch for Message.findAll
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-// Post new message
+// Post a new user message
 router.post('/', (req, res) => {
-  // Creates new message with information sent from public/assets/message.js
+  // 
   Message.create({
     sender_id: req.body.sender_id,
     recipient_id: req.body.recipient_id,
     text_messages: req.body.text_messages
   })
-    .then((dbMessageData) => res.json(dbMessageData))
+    .then((dbmessageIE) => res.json(dbmessageIE))
     .catch((err) => {
       console.log(err);
       res.status(400).json(err);

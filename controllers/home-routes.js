@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { User, Message } = require('../models');
-const { recentUserchat } = require('../utils/filters');
+const { getrecentUserchat } = require('../utils/filters');
 const { Op } = require('sequelize');
 
 var sessionId;
 
-// Redirect homepage to either login page (if not logged in) OR chat page (if logged in)
+// Get request to redirect to login page or chat page
 router.get('/', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('/login');
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   }
 });
 
-// Show login page if user is logged out, but show /chat page if user is logged in
+// Get request: login page is shown if logged out, but showing chat page if logged in
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/chat');
@@ -25,7 +25,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-// Show register page if user is logged out, but show /chat page if user is logged in
+// Get request to show if register page if logged out, but showing chat page if logged in
 router.get('/register', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/chat');
@@ -34,54 +34,52 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
-// Finds information for currently logged in user to display information properly
+// Get request to show all info once logged in
 router.get('/chat', (req, res) => {
-  // Redirect to /login if not logged in
   if (!req.session.loggedIn) {
     res.redirect('/login');
     return;
   }
 
-  sessionId = req.session.user_id; // Get session user's id
+  sessionId = req.session.user_id; 
   User.findAll({
     attributes: ['id', 'first_name', 'last_name']
   })
     .then((dbUserData) => {
-      // Map users for plain javascript of data
+      // Maping each user with their data
       const user = dbUserData.map((user) => user.get({ plain: true }));
 
-      // Gets information for current user
-      const recentUser = recentUserchat(null, user, sessionId);
+      // Acquires chat info for users
+      const recentUserchat = getrecentUserchat(null, user, sessionId);
 
-      // Renders page with chat handlebars
+      // Renders webpage with chat.handlebars
       res.render('chat', {
-        recentUser,
+        recentUserchat,
         loggedIn: req.session.loggedIn,
-        chatHome: true // Boolean for if chat is page home or user page
+        chatHome: true 
       });
     })
-    // Error catch for User.findAll
+   
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-// Find all messages between two specific users
+// Get request to obtain messages between a conversation between users
 router.get('/chat/:id', (req, res) => {
-  // Redirect to /login if not logged in
   if (!req.session.loggedIn) {
     res.redirect('/login');
     return;
   }
-  // If user is chatting with everyone, reroute undefined to chat home
+  // Rerdirecting to chat home if undefined
   if (req.params.id == 'undefined') {
     res.redirect('/chat');
     return;
   }
 
   sessionId = req.session.user_id;
-  // If user goes to page with their own id, redirect them to home, they can't chat alone
+  // Redirecting to homepage if they are on their own ID page
   if (req.params.id == sessionId) {
     res.redirect('/chat');
     return;
@@ -89,17 +87,15 @@ router.get('/chat/:id', (req, res) => {
   Message.findAll({
     where: {
       [Op.or]: [
-        // If receiver id = session id AND sender id = param id
         { recipient_id: sessionId, sender_id: req.params.id },
-        // OR receiver id = param id AND sender id = session id
         { recipient_id: req.params.id, sender_id: sessionId }
       ]
     },
-    // Display all messages in order by message id
+    // Ordering messages by ID
     order: [['id']]
   })
-    .then((dbMessageData) => {
-      // Gets all users and info
+    .then((dbmessageIE) => {
+      // Obtaining user info
       User.findAll({
         attributes: [
           'id',
@@ -107,15 +103,14 @@ router.get('/chat/:id', (req, res) => {
           'last_name',
           'pronouns',
           'gender',
-          'sexual_preference',
           'bio'
         ]
       })
         .then((dbUserData) => {
-          // Map users for plain javascript of data
+          // Mapping user data
           const user = dbUserData.map((user) => user.get({ plain: true }));
 
-          // Searches to see if the param id exists in the user table
+          // Seeing if the param Id exists for each user
           let userExist = false;
           user.forEach((user) => {
             if (user.id == req.params.id) {
@@ -123,47 +118,46 @@ router.get('/chat/:id', (req, res) => {
               return;
             }
           });
-          // If user does not exist, redirect to chat home
+          // Redirecting user to the chat home, if the user doesn't exist
           if (!userExist) {
             res.redirect('/');
             return;
           }
 
-          // Map messages for plain javascript of data
-          const messages = dbMessageData.map((message) =>
+          const messages = dbmessageIE.map((message) =>
             message.get({ plain: true })
           );
 
-          // Gets information for current user
-          const recentUser = recentUserchat(
+          // Gets current user chat information
+          const recentUserchat = getrecentUserchat(
             messages,
             user,
             sessionId,
             req.params.id
           );
 
-          // Render all messages on specific chat page
+          // Render messages from chat.handlebars
           res.render('chat', {
             messages,
-            recentUser,
+            recentUserchat,
             loggedIn: req.session.loggedIn,
             chatHome: false // Boolean for if chat is page home or user page
           });
         })
-        // Error catch for User.findAll
+
         .catch((err) => {
           console.log(err);
           res.status(500).json(err);
         });
     })
-    // Error catch for Message.findAll
+
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-// Redirect to homepage for any page that does not exist
+// Get request to go to homepage if there is no page exits
 router.get('*', (req, res) => {
   res.redirect('/');
 });
