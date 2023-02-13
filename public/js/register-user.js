@@ -1,18 +1,17 @@
 async function createNewUser(event) {
   event.preventDefault();
 
-  const first_name = document.querySelector('#register-lastname').value.trim();
-  const last_name = document.querySelector('#register-lastname').value.trim();
-  const email = document.querySelector('#register-email').value.trim();
-  const password = document.querySelector('#register-password').value.trim();
+  const email = document.querySelector('#registerEmail').value.trim();
+  const password = document.querySelector('#registerPwd').value.trim();
+  const first_name = document.querySelector('#registerFirstname').value.trim();
+  const last_name = document.querySelector('#registerLastname').value.trim();
   const gender = document.querySelector('#genders').value.trim();
+
   const pronouns = document.querySelector('#pronouns').value.trim();
   const bio = document.querySelector('#bio').value.trim();
-  const required = [email, password, first_name, last_name, gender, bio];
 
-  if (required === '' || null) {
-    alert('Required field missing');
-  } else {
+
+  if (first_name && last_name && email && password) {
     const response = await fetch('/api/users', {
       method: 'post',
       body: JSON.stringify({
@@ -20,28 +19,30 @@ async function createNewUser(event) {
         last_name,
         email,
         password,
-        gender,
-        pronouns,
         bio,
+        gender,
+        pronouns
       }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' }
     });
+
     if (response.ok) {
-      logInUser(email, password);
+      loginTheUser(email, password);
     } else {
       alert(response.statusText);
     }
   }
 }
 
-async function logInUser(email, password) {
+// Automatic login function
+async function loginTheUser(email, password) {
   const response = await fetch('/api/users/login', {
     method: 'post',
     body: JSON.stringify({
       email,
-      password,
+      password
     }),
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' }
   });
 
   if (response.ok) {
@@ -51,6 +52,4 @@ async function logInUser(email, password) {
   }
 }
 
-document
-  .querySelector('.register-form')
-  .addEventListener('submit', createNewUser);
+document.querySelector('.registerInform').addEventListener('submit', createNewUser);
