@@ -1,36 +1,44 @@
-const currentMsgList = document.querySelector('#recent-list');
+const currentMsgList = document.querySelector('#recentUserList');
 
-async function displayChatList() {
-  const response = await fetch('/api/messages/recent', { method: 'GET' });
-  const data = await response.json();
+async function showChatList() {
+    // get method for recent user
+    const response = await fetch('/api/messages/recent', { method: 'GET' });
+    const data = await response.json();
 
-  if (data.length > 0) {
-    var webUrlPage = document.location.href.split('/');
-    webUrlPage = webUrlPage[webUrlPage.length - 1].split('#')[0];
+    if (data.length > 0) {
+        var webUrlPage = document.location.href.split('/');
+        webUrlPage = webUrlPage[webUrlPage.length - 1].split('#')[0];
 
-    data.forEach((element) => {
-      let recents = document.createElement('li');
-      recents.setAttribute('id', `user-${element.id}`);
+        // creating list of users for each added user
+        data.forEach((element) => {
+            let recentLi = document.createElement('li');
+            recentLi.setAttribute('id', `user-${element.id}`);
 
-      if (element.id == webUrlPage) {
-        recents.className = 'selected';
-      }
+            // show the current user being messaged
+            if (element.id == webUrlPage) {
+                recentLi.className = 'selected';
+            }
 
-      recents.innerHTML = `<a href="/chat/${element.id}"><div>
+            // Link and text for webpage
+            recentLi.innerHTML = `<a href="/chat/${element.id}"><div>
       <h3 class="name"> ${
-        element.first_name.charAt(0).toUpperCase() + element.first_name.slice(1)
+        element.first_name.charAt(0).toUpperCase() +
+        element.first_name.slice(1)
       } ${element.last_name.charAt(0).toUpperCase()}.</h3>
       <span class="latest-message">${element.latest_message}</span>
       </div></a>`;
 
-      currentMsgList.appendChild(recents);
-    });
-  } else {
-    currentMsgList.innerHTML = `<li><div>You have no current messages.</div></li>`;
-  }
+            // Append to to webpage
+            currentMsgList.appendChild(recentLi);
+        });
+    } else {
+        // showing no messages if there is no data
+        currentMsgList.innerHTML = `<li><div>You currently have no chats.</div></li>`;
+    }
 }
 
-displayChatList().catch(
-  (response) =>
-    (currentMsgList.innerHTML = `<li class="error-msg"><div>Your message list is unable to display at this time. <button onclick="window.location.reload()" class="error-btn">Refresh the page <i class="fa-solid fa-rotate-right"></i></button></div></li>`)
+// displaying error message
+showChatList().catch(
+    (response) =>
+    (currentMsgList.innerHTML = `<li class="error-msg"><div>There's been an error displaying the recent chat list. <button onclick="window.location.reload()" class="error-btn">Refresh the page <i class="fa-solid fa-rotate-right"></i></button></div></li>`)
 );
