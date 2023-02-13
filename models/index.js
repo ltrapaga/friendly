@@ -3,22 +3,20 @@ const Message = require('./Message');
 
 User.hasMany(Message, {
   foreignKey: 'sender_id',
-  as: 'sender',
+  as: 'sender'
 });
-
 Message.belongsTo(User, {
   foreignKey: 'sender_id',
-  as: 'sender',
+  as: 'sender'
 });
 
 User.hasMany(Message, {
   foreignKey: 'recipient_id',
-  as: 'recipient',
+  as: 'receiver'
 });
-
 Message.belongsTo(User, {
   foreignKey: 'recipient_id',
-  as: 'recipient',
+  as: 'receiver'
 });
 
 module.exports = { User, Message };
