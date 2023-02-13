@@ -12,43 +12,43 @@ async function createNewUser(event) {
 
 
   if (first_name && last_name && email && password) {
-    const response = await fetch('/api/users', {
-      method: 'post',
-      body: JSON.stringify({
-        first_name,
-        last_name,
-        email,
-        password,
-        bio,
-        gender,
-        pronouns
-      }),
-      headers: { 'Content-Type': 'application/json' }
-    });
+      const response = await fetch('/api/users', {
+          method: 'post',
+          body: JSON.stringify({
+              first_name,
+              last_name,
+              email,
+              password,
+              bio,
+              gender,
+              pronouns
+          }),
+          headers: { 'Content-Type': 'application/json' }
+      });
 
-    if (response.ok) {
-      loginTheUser(email, password);
-    } else {
-      alert(response.statusText);
-    }
+      if (response.ok) {
+          loginTheUser(email, password);
+      } else {
+          alert(response.statusText);
+      }
   }
 }
 
 // Automatic login function
 async function loginTheUser(email, password) {
   const response = await fetch('/api/users/login', {
-    method: 'post',
-    body: JSON.stringify({
-      email,
-      password
-    }),
-    headers: { 'Content-Type': 'application/json' }
+      method: 'post',
+      body: JSON.stringify({
+          email,
+          password
+      }),
+      headers: { 'Content-Type': 'application/json' }
   });
 
   if (response.ok) {
-    document.location.replace('/chat');
+      document.location.replace('/chat');
   } else {
-    alert(response.statusText);
+      alert(response.statusText);
   }
 }
 

@@ -4,8 +4,8 @@ const { User, Message } = require('../../models');
 // Get request for every user
 router.get('/', (req, res) => {
     User.findAll({
-        attributes: { exclude: ['password', 'email'] }
-    })
+            attributes: { exclude: ['password', 'email'] }
+        })
         .then((dbUserData) => res.json(dbUserData))
         .catch((err) => {
             console.log(err);
@@ -16,9 +16,9 @@ router.get('/', (req, res) => {
 // get request for single user
 router.get('/:id', (req, res) => {
     User.findOne({
-        where: { id: req.params.id },
-        attributes: { exclude: ['password', 'email'] }
-    })
+            where: { id: req.params.id },
+            attributes: { exclude: ['password', 'email'] }
+        })
         .then((dbUserData) => {
             if (!dbUserData) {
                 res.status(404).json({ message: 'Could not find user with this ID' });
@@ -85,10 +85,10 @@ router.post('/logout', (req, res) => {
 // deleting the user based off ID
 router.delete('/:id', (req, res) => {
     User.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
+            where: {
+                id: req.params.id
+            }
+        })
         .then((dbUserData) => {
             if (!dbUserData) {
                 res.status(404).json({ message: 'Could not find user with this id' });
