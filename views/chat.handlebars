@@ -9,7 +9,6 @@
     <div class='welcome-info'>
       {{#with recentUserchat.thisUser}}
         Welcome, {{capitalize_first_name first_name}}!
-       <a href='/chat'><img src='/assets/images/logo-light.svg' alt='randm logo' /></a>
       {{/with}}
       <!-- Logout and Delete buttons -->
       <div class='user-options'>
@@ -33,7 +32,7 @@
       <ul id='recentUserList'></ul>
       <a href='#' class='close-toggle'></a>
     </div>
-    <script src='/assets/js/recent.js'></script>
+    <script src='/public/js/recent.js'></script>
 
     <!-- current chat list -->
     <div class='current-chat'>
@@ -43,7 +42,7 @@
           {{#with recentUserchat.thisUser}}
             <button id='random-btn' user-Data='{{id}}'>Talk with someone new!</button>
           {{/with}}
-          <script src='/assets/js/random-chat.js'></script>
+          <script src='/public/js/random-chat.js'></script>
         </div>
         
       {{else}}
@@ -84,12 +83,12 @@
             <button type='submit' id='send-message-btn' user-Data='{{id}}'>Send</button>
           {{/with}}
         </form>
-        <script src='/assets/js/message.js'></script>
-        <script src='/assets/js/socket.js'></script>
+        <script src='/public/js/message.js'></script>
+        <script src='/public/js/socket.js'></script>
       {{/if}}
     </div>
   </main>
 </div>
 
-<script src='/assets/js/logout.js'></script>
-<script src='/assets/js/delete-user.js'></script>
+<script src='/public/js/logout.js'></script>
+<script src='/public/js/delete-user.js'></script>
