@@ -3,10 +3,10 @@
     background: #fccb90;
     
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to bottom right, rgba(252, 203, 144, 1), rgba(213, 126, 235, 1));
+    background: -webkit-linear-gradient(to bottom right, rgb(221, 10, 221), rgb(216, 44, 81));
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to bottom right, rgba(252, 203, 144, 1), rgba(213, 126, 235, 1))
+    background: linear-gradient(to bottom right, rgb(33, 47, 245), rgba(96, 102, 145, 0.39))
     }
     
     .mask-custom {
@@ -17,3 +17,223 @@
     background-clip: padding-box;
     box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
     }
+
+
+    :root {
+        --main-color: #62a8f8;
+        /* Main Color */
+        --secondary-color: #3a3df0;
+        /* Secondary Color */
+        --secondary-lighter: #1661ee;
+        /* Lighter Version of Secondary Color */
+        --lightest-color: #f6f9f9;
+        /* Light-Gray Color */
+        --mid-color: #afb5b6;
+        /* Mid-Gray Color */
+        --darkest-color: #7c8385;
+        /* Darker-Gray Color */
+        --sidebar-color: #edf3f3;
+        /* Sidebar Background Color */
+        --sidebar-highlight-color: #e0e9e9;
+        /* Sidebar Highlight Color */
+    }
+    
+    * {
+        
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        line-height: 1;
+        background-color: var(--lightest-color);
+        color: var(--darkest-color);
+    }
+    
+    a,
+    a:hover,
+    button,
+    button:hover,
+    li,
+    li:hover {
+        transition: all 0.5s ease-in-out;
+    }
+    
+    button:hover {
+        cursor: pointer;
+    }
+    
+    a {
+        color: var(--main-color);
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: var(--secondary-color);
+    }
+    
+    input:focus {
+        outline: 0;
+    }
+    
+    .open-toggle,
+    .close-toggle {
+        display: none;
+    }
+    
+    
+    /* IF NOT LOGGED IN */
+    
+    .unlogged-page {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        min-height: calc(100vh - 0px);
+    }
+
+    
+    /* signup words */
+    h3 {
+        text-align: center; /* add this line */
+        position: relative;
+        justify-content: center;
+        color: #727677;
+        padding: 8px;
+      }
+      
+    
+      #create-account{
+        text-align: center; 
+        position: relative;
+        justify-content: center;
+        width: 100%;
+        border-radius: 5px;
+      }
+    /* Display form on right */
+    
+    .unlogged-page .forms {
+        width: calc(40% - 40px);
+        margin: 0;
+        background-color: var(--sidebar-color);
+        padding: 20px;
+        font-size: 1em;
+    }
+    
+    .unlogged-page .forms input,
+    .unlogged-page .forms select,
+    .unlogged-page .forms textarea {
+        padding: 10px;
+        margin: 5px 0 15px;
+        width: 100%;
+        font-size: 1em;
+        background-color: white;
+        border: 1px solid var(--sidebar-highlight-color);
+        color: var(--darkest-color);
+        font-family: sans-serif;
+    }
+    
+    .unlogged-page .forms textarea {
+        height: 120px;
+    }
+    
+    .unlogged-page .forms input:focus,
+    .unlogged-page .forms select:focus,
+    .unlogged-page .forms textarea:focus {
+        outline: 1px solid var(--secondary-lighter);
+        border: 1px solid white;
+    }
+    
+    .unlogged-page .forms button {
+        padding: 10px;
+        font-size: 1em;
+        border: none;
+        background-color: var(--secondary-lighter);
+        color: white;
+    }
+    
+    .unlogged-page .forms .form-message {
+        font-size: 0.9em;
+        font-style: italic;
+        margin: 15px 0 0;
+    }
+    a{
+        height: -200px;
+    }
+    
+ 
+    @media screen and (max-width: 680px) {
+        body {
+            font-size: 18px;
+        }
+        .unlogged-page .logo,
+        .unlogged-page .forms {
+            width: 100%;
+        }
+        .open-toggle,
+        .close-toggle {
+            display: block;
+        }
+        .logged-in header .open-toggle {
+            width: 100%;
+            margin: 15px 0 25px;
+        }
+        .logged-in header .open-toggle a {
+            color: white;
+            background-color: var(--secondary-color);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .logged-in main {
+            position: relative;
+        }
+        .recent-chat {
+            width: 80%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -100%;
+            transition: all 0.5s ease-in-out;
+        }
+        .recent-chat a.close-toggle {
+            position: absolute;
+            left: calc(100% + 15px);
+            top: 10px;
+            color: white;
+            font-size: 2em;
+        }
+        .recent-chat a.close-toggle:hover {
+            color: var(--sidebar-highlight-color);
+            transform: rotate(180deg);
+        }
+        .recent-chat::before {
+            content: '';
+            width: 25%;
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+        .recent-chat:target {
+            left: 0;
+            transition: all 0.5s ease-in-out;
+        }
+        .recent-chat:target::before {
+            transition: all 0.5s ease-in-out;
+            left: 100%;
+        }
+        .current-chat {
+            width: 100%;
+        }
+        .current-chat .messages ol li .message {
+            max-width: 70%;
+        }
+    }
+    

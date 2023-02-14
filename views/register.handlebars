@@ -1,16 +1,18 @@
 <div class='unlogged-page'>
-  <div class='logo'>
-    
-  </div>
-  <div class='forms'>
+  <div class='col-sm-8 forms' style='margin: 0 auto; border-radius: 15px;'>
+    <div class='logo'>
+      
+    </div>
     <form class='registerInform'>
       <div>
+        <h3>Create account</h3> 
         <label for='registerEmail'>Email:</label>
         <input type='text' id='registerEmail' />
       </div>
       <div>
         <label for='registerPwd'>Password:</label>
         <input type='password' id='registerPwd' autocomplete='no' />
+        
       </div>
       <div>
         <label for='registerFirstname'>First Name:</label>
@@ -38,13 +40,12 @@
         <textarea id='bio' rows='10' cols='50' placeholder='Write a little about yourself and what you are looking for in a new friendship.'></textarea>
       </div>
       <div>
-        <button type='submit'>Create account</button>
+        <button id="create-account" type='submit'>Create account</button>
       </div>
-    </form>
-    <div class='form-message'>
-      <a href='/login'>Login here!</a>
+    </form>  
+    <p class="text-center text-muted mt-5 mb-0">Already have an account? <a href="/login"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
     </div>
   </div>
 </div>
-
 <script src='/assets/js/register.js'></script>
