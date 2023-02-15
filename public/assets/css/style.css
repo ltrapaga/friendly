@@ -107,7 +107,9 @@
         padding: 8px;
       }
       
-    
+
+      
+    /* crete account button */
       #create-account{
         text-align: center; 
         position: relative;
@@ -166,7 +168,7 @@
         height: -200px;
     }
     
- 
+ /* mobile view */
     @media screen and (max-width: 680px) {
         body {
             font-size: 18px;
@@ -235,5 +237,46 @@
         .current-chat .messages ol li .message {
             max-width: 70%;
         }
+    }
+    .logged-in header .welcome-info i {
+        font-size: 1.5em;
+        padding-bottom: 10px;
+        margin-top: 10px;
+    }
+    
+    .logged-in header .welcome-info .user-options {
+        z-index: -1;
+        position: absolute;
+        background-color: white;
+        border: 1px solid var(--sidebar-highlight-color);
+        box-shadow: 0 0 1px var(--darkest-color);
+        padding: 10px;
+        right: 20px;
+        opacity: 0;
+        transition: all 0.1s ease-in-out;
+    }
+    
+    .logged-in header .welcome-info:hover .user-options {
+        z-index: 100;
+        opacity: 1;
+        transition: all 0.1s ease-in-out;
+    }
+    
+    .logged-in header .welcome-info .user-options ul {
+        list-style-type: none;
+        margin: 0;
+    }
+    
+    .logged-in header .welcome-info .user-options ul button {
+        padding: 5px 15px;
+        border: none;
+        background-color: transparent;
+        color: var(--darkest-color);
+        font-size: 1em;
+        text-align: center;
+    }
+    
+    .logged-in header .welcome-info .user-options ul button:hover {
+        color: var(--secondary-color);
     }
     
