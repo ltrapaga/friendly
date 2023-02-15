@@ -1,0 +1,16 @@
+.gradient-custom {
+    /* fallback for old browsers */
+    background: hsl(183, 92%, 75%);
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132,250,176,0.5), rgba(143,211,244,0.5));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132,250,176,0.5), rgba(143,211,244,0.5))
+  }
+
+  .bd-outline {
+  --bs-btn-border-color: #008B8B;
+  --bs-btn-hover-bg:  #e6ffff;
+  --bs-btn-hover-border-color:  #008B8B
+  }
