@@ -1,6 +1,8 @@
-# The Chat Project
+# Friendly Chat App
 
 ## Description
+
+Introducing Friendly, our new chat application. Friendly is designed to help you connect with like-minded people and potential new friends! With our app, you can easily find and chat with strangers who could share similar interests and hobbies. Our app is user-friendly, so you can express your unique personality while chatting with new friends. Plus, we take your privacy seriously and ensure your conversations are always secure. Expand your social circle and find new friends with ease using our chat app!
 
 ## Table of Contents
 
