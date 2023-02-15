@@ -1,23 +1,41 @@
-<div class="unlogged-page">
-  <div class="logo">
-  
+<section class="gradient-custom">
+  <div class="container-fluid py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center p-5">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+            <div class="col-md">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <img src="/assets/images/logo_login.jpeg" class="img-fluid"
+                    style="max-height: 500px; max-width: 300px;" alt="logo">
+                </div>
+
+                <form>
+                  <div class="form-outline mx-4">
+                    <input type="email" id="form2Example11" class="form-control"
+                      placeholder="Email address" />
+                    <label class="form-label" for="form2Example11">Username</label>
+                  </div>
+
+                  <div class="form-outline mx-4">
+                    <input type="password" id="form2Example22" class="form-control" />
+                    <label class="form-label" for="form2Example22">Password</label>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <button type="button" class="btn bd-outline">Create new</button>
+                  </div>
+
+                </form>
+
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="forms">
-    <form class="loginInform">
-      <div>
-        <label for="loginEmail">Email:</label>
-        <input type="text" id="loginEmail" />
-      </div>
-      <div>
-        <label for="loginPwd">Password:</label>
-        <input type="password" id="loginPwd" />
-      </div>
-      <div>
-        <button type="submit">Login</button>
-      </div>
-    </form>
-      <a href="/register">Create an Account!</a>
-  </div>
-</div>
+</section>
 
 <script src="/assets/js/login.js"></script>
