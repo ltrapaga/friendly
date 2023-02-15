@@ -1,12 +1,12 @@
 .unlogged-page {
     /* fallback for old browsers */
-    background: #fccb90;
+    background: #376fe9;
     
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to bottom right, rgb(221, 10, 221), rgb(216, 44, 81));
+    background: -webkit-linear-gradient(to bottom right, rgb(33, 47, 245), rgba(96, 102, 145, 0.39));
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to bottom right, rgb(33, 47, 245), rgba(96, 102, 145, 0.39))
+    background: linear-gradient(to bottom right, rgb(33, 47, 245), rgba(96, 102, 145, 0.39));
     }
     
     .mask-custom {
