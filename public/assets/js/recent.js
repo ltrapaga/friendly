@@ -9,23 +9,35 @@ async function showChatList() {
     var webUrlPage = document.location.href.split('/');
     webUrlPage = webUrlPage[webUrlPage.length - 1].split('#')[0];
 
-    // creating list of users for each added user
-    data.forEach((element) => {
-      let recentLi = document.createElement('li');
-      recentLi.setAttribute('id', `user-${element.id}`);
+        // creating list of users for each added user
+        data.forEach((element) => {
+            let recentLi = document.createElement('li');
+            recentLi.setAttribute('id', `user-${element.id}`);
+            recentLi.setAttribute('class', 'p-2 border-bottom')
+            recentLi.setAttribute('style', 'border-bottom: 1px solid rgba(255,255,255,.3) !important;')
 
       // show the current user being messaged
       if (element.id == webUrlPage) {
         recentLi.className = 'selected';
       }
 
-      // Link and text for webpage
-      recentLi.innerHTML = `<a href="/chat/${element.id}"><div>
-      <h3 class="name"> ${element.first_name.charAt(0).toUpperCase() +
-                element.first_name.slice(1)
-} ${element.last_name.charAt(0).toUpperCase()}.</h3>
-      <span class="latest-message">${element.latest_message}</span>
-      </div></a>`;
+            // Link and text for webpage
+            recentLi.innerHTML = `
+            <a href="/chat/${element.id}">
+            <div class="d-flex flex-row">
+            <div class="pt-1">
+            <p class="fw-bold mb-0"> ${
+                element.first_name.charAt(0).toUpperCase()
+            } 
+            ${
+                element.last_name.charAt(0).toUpperCase()
+            }
+            </p>
+            <p class="latest-message small text-white">${element.latest_message}
+            </p>
+            </div>
+            </div>
+            </a>`;
 
       // Append to to webpage
       currentMsgList.appendChild(recentLi);
