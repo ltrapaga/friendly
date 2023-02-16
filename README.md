@@ -36,7 +36,7 @@ Front Page
 <img width="1407" alt="image" src="https://user-images.githubusercontent.com/111899130/219514220-ffcb3009-de29-4ef9-804d-4fb7004e4ba1.png">
 
 Register Page
-<img width="1438" alt="image" src="https://user-images.githubusercontent.com/111899130/219514420-342709ab-139b-4b6e-b979-8812b96486a8.png">
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/111899130/219514938-d27c0da3-37e6-4141-8f0b-80ebb5fd59be.png">
 
 Chat Page
 <img width="1429" alt="image" src="https://user-images.githubusercontent.com/111899130/219514596-5fc01898-f601-467f-8027-bc6e82da137d.png">
