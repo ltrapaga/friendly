@@ -1,53 +1,69 @@
-<div class='unlogged-page'>
-  <div class='col-sm-8 forms' style='margin: 0 auto; border-radius: 15px;'>
-    <div class='logo'>
-      
-    </div>
-    <form class='registerInform'>
-      <div>
-        <h3>Create account</h3> 
-        <label for='registerEmail'>Email:</label>
-        <input type='text' id='registerEmail' />
-      </div>
-      <div>
-        <label for='registerPwd'>Password:</label>
-        <input type='password' id='registerPwd' autocomplete='no' />
-        
-      </div>
-      <div>
-        <label for='registerFirstname'>First Name:</label>
-        <input type='text' id='registerFirstname' />
-      </div>
-      <div>
-        <label for='registerLastname'>Last Name:</label>
-        <input type='text' id='registerLastname' />
-      </div>
-      <div>
-        <label for='gender'>Gender Identity:</label>
-        <select name='genders' id='genders'>
-          <option value='female'>Female</option>
-          <option value='male'>Male</option>
-          <option value='non-binary'>Non-Binary</option>
-          <option value='undisclosed'>Undisclosed</option>
-        </select>
-      </div>
-      <div>
-        <label for='pronoun'>Pronouns:</label>
-        <input type='text' id='pronouns' />
-      </div>
-      <div>
-        <label for='bio'>Bio:</label>
-        <textarea id='bio' rows='10' cols='50' placeholder='Write a little about yourself and what you are looking for in a new friendship.'></textarea>
-      </div>
-      <div>
-        <button id="create-account" type='submit'>Create account</button>
-      </div>
-    </form>  
-    
-    
-    <p class="text-center text-muted mt-5 mb-0">Already have an account? <a href="/login"
+
+  <div class="unlogged-page mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100 ">
+        <div class="forms col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create account</h2>
+
+              <form class='registerInform'>
+
+                <div class="form-outline mb-4">
+                  <label for='registerEmail'>Email:</label>
+                  <input type="text" id="registerEmail" class="form-control form-control-lg" />
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label for='registerPwd'>Password:</label>
+                  <input type="text" id="registerPwd" class="form-control form-control-lg" />
+                </div>
+
+               <div class="form-outline mb-4">
+                  <label for='registerFirstname'>First Name:</label>
+                  <input type="text" id="registerFirstname" class="form-control form-control-lg" />
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label for='registerLastname'>Last Name:</label>
+                  <input type="text" id="registerLastname" class="form-control form-control-lg" />
+                </div>
+
+                  <label for='registerLastname'>Gender</label>
+                <div class="form-outline mb-4">
+                    <select name='genders' id='genders'>
+                      <option value='female'>Female</option>
+                      <option value='male'>Male</option>
+                      <option value='non-binary'>Non-Binary</option>
+                      <option value='undisclosed'>Undisclosed</option>
+                    </select>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label for='pronouns'>Pronouns:</label>
+                  <input type="text" id="pronouns" class="form-control form-control-lg" />
+                </div>
+
+                <div>
+                  <label for='bio'>Bio:</label>
+                  <textarea id='bio' rows='10' cols='50' placeholder='Write a little about yourself and what you are looking for in a new friendship.'></textarea>
+                </div>
+              
+                <div class="d-flex justify-content-center">
+                  <button id="create-account" type="submit"
+                    class="btn btn-block btn-lg gradient-custom-4 text-body">Create account</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
                     class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
-  </div>
-</div>
+</section>
 <script src='/assets/js/register.js'></script>
+
