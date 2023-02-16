@@ -16,7 +16,7 @@ module.exports = {
       minute: '2-digit'
     });
   },
-  // Displaying received or sent message 
+  // Displaying received or sent message
   acquireChat: (sendUserId, atmID) => {
     if (sendUserId !== atmID) {
       return 'received';
