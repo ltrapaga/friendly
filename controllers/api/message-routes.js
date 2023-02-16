@@ -81,7 +81,6 @@ router.get('/recent', (req, res) => {
 
 // Post a new user message
 router.post('/', (req, res) => {
-  // 
   Message.create({
     sender_id: req.body.sender_id,
     recipient_id: req.body.recipient_id,

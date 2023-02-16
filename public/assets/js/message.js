@@ -8,6 +8,7 @@ async function sendMsgForm(event) {
   let recipient_id = window.location.toString().split('/');
   recipient_id = parseInt(recipient_id[recipient_id.length - 1].split('#')[0]);
 
+  // fetch request to post the user's message
   if (text_messages) {
     const response = await fetch('/api/messages', {
       method: 'POST',

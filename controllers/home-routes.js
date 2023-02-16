@@ -41,7 +41,7 @@ router.get('/chat', (req, res) => {
     return;
   }
 
-  sessionId = req.session.user_id; 
+  sessionId = req.session.user_id;
   User.findAll({
     attributes: ['id', 'first_name', 'last_name']
   })
@@ -56,10 +56,10 @@ router.get('/chat', (req, res) => {
       res.render('chat', {
         recentUserchat,
         loggedIn: req.session.loggedIn,
-        chatHome: true 
+        chatHome: true
       });
     })
-   
+
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);

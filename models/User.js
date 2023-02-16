@@ -7,7 +7,7 @@ class User extends Model {
     return bcrypt.compareSync(loginPW, this.password);
   }
 }
-
+// Creates new JQuery object for user information
 User.init(
   {
     id: {
