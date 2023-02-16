@@ -31,6 +31,15 @@ The following necessary dependencies must be installed to run the application:
 
 To use this application: Create an account, and fill in the required user information. Once the account has been created, you will be directed to the chat home page where you can select to talk to other users. Your recent chat list will be located on the left-hand side of the screen. Sending a message to the user, will automatically place their name into the recent chat list. You have the option to talk to other users by selecting "Home" at the top left hand side of the navigation bar. Additionally, you are able to "sign out" or "delete your account" when hovering over your name on the right-hand side of the navigation bar. 
 
+<img width="1407" alt="image" src="https://user-images.githubusercontent.com/111899130/219514220-ffcb3009-de29-4ef9-804d-4fb7004e4ba1.png">
+
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/111899130/219514420-342709ab-139b-4b6e-b979-8812b96486a8.png">
+
+<img width="1429" alt="image" src="https://user-images.githubusercontent.com/111899130/219514596-5fc01898-f601-467f-8027-bc6e82da137d.png">
+
+
+
+
 ## License
 
  [![License](<https://img.shields.io/badge/License-MIT-yellow.svg>)](<https://opensource.org/licenses/MIT>)
