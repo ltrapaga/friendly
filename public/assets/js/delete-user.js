@@ -13,7 +13,7 @@ async function deleteUserForm() {
 
   // logging out user when deleted
   if (response.ok) {
-    logoutButton.click(); 
+    logoutButton.click();
   } else {
     alert(response.statusText);
   }

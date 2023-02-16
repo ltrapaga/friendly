@@ -1,6 +1,7 @@
 const { Message } = require('../models');
 
-const messageIE = [{
+const messageIE = [
+    {
         sender_id: 1,
         recipient_id: 2,
         text_messages: 'Hello, how are you doing?'

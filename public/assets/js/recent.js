@@ -21,10 +21,9 @@ async function showChatList() {
 
             // Link and text for webpage
             recentLi.innerHTML = `<a href="/chat/${element.id}"><div>
-      <h3 class="name"> ${
-        element.first_name.charAt(0).toUpperCase() +
-        element.first_name.slice(1)
-      } ${element.last_name.charAt(0).toUpperCase()}.</h3>
+      <h3 class="name"> ${element.first_name.charAt(0).toUpperCase() +
+                element.first_name.slice(1)
+                } ${element.last_name.charAt(0).toUpperCase()}.</h3>
       <span class="latest-message">${element.latest_message}</span>
       </div></a>`;
 
@@ -40,5 +39,5 @@ async function showChatList() {
 // displaying error message
 showChatList().catch(
     (response) =>
-    (currentMsgList.innerHTML = `<li class="error-msg"><div>There's been an error displaying the recent chat list. <button onclick="window.location.reload()" class="error-btn">Refresh the page <i class="fa-solid fa-rotate-right"></i></button></div></li>`)
+        (currentMsgList.innerHTML = `<li class="error-msg"><div>There's been an error displaying the recent chat list. <button onclick="window.location.reload()" class="error-btn">Refresh the page <i class="fa-solid fa-rotate-right"></i></button></div></li>`)
 );

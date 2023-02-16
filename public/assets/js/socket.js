@@ -1,7 +1,7 @@
 let atmId = 0;
 let webId = 0;
 
-const socket = io(); 
+const socket = io();
 
 // After clicking the submit button, the user will obtain information of the other user
 document.querySelector('.send-message').addEventListener('submit', (event) => {
@@ -75,7 +75,7 @@ socket.on('new message', (data) => {
         if (fromChatUser) {
             fromChatUser.parentElement.removeChild(fromChatUser);
         }
-        
+
         let newFromChatUser = document.createElement('li');
         newFromChatUser.setAttribute('id', `user-${fromUserId}`);
 

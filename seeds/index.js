@@ -2,7 +2,7 @@ const sequelize = require('../config/connection');
 const seedUsers = require('./user-seeds');
 const seedMessages = require('./message-seeds');
 
-const getallSeeds = async() => {
+const getallSeeds = async () => {
     await sequelize.sync({ force: true });
     console.log('\n----- DATABASE SYNCED -----\n');
 
