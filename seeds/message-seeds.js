@@ -3,37 +3,37 @@ const { Message } = require('../models');
 const messageIE = [{
         sender_id: 1,
         recipient_id: 2,
-        text_messages: 'Hi, how are you?'
+        text_messages: 'Hello, how are you doing?'
     },
     {
         sender_id: 2,
         recipient_id: 1,
-        text_messages: 'Hi there - good, how about you? What kind of music do you like?'
+        text_messages: 'Hey I am doing well, How about you?'
     },
     {
         sender_id: 1,
         recipient_id: 2,
-        text_messages: 'I love basically everything, been listening to jazz a lot today. What about you?'
+        text_messages: 'I am doing well, I see you enjoy basketball.'
     },
     {
         sender_id: 2,
         recipient_id: 1,
-        text_messages: 'Nice, I like jazz and hip hop a lot!'
+        text_messages: 'Yeah i love sports in general!'
     },
     {
         sender_id: 2,
         recipient_id: 3,
-        text_messages: 'Hi, what is your favorite food?'
+        text_messages: 'Hey there, do you want to hang out sometime?'
     },
     {
         sender_id: 3,
         recipient_id: 2,
-        text_messages: 'Hi! I love Thai food. What about you?'
+        text_messages: 'Yeah, sure! What time are you free?'
     },
     {
         sender_id: 2,
         recipient_id: 3,
-        text_messages: 'Ooh I love Thai but my favorite is Italian'
+        text_messages: 'I am free on the weekend'
     }
 ];
 

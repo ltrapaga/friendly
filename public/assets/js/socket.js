@@ -3,26 +3,27 @@ let webId = 0;
 
 const socket = io(); 
 
-// after clicking the submit button, the user will obtain information of the other user
+// After clicking the submit button, the user will obtain information of the other user
 document.querySelector('.send-message').addEventListener('submit', (event) => {
     event.preventDefault();
 
-    // obtaining id of the recipient
+    // Obtaining id of the recipient
     webId = document.location.href.split('/');
     webId = webId[webId.length - 1].split('#')[0];
     if (webId.includes('?')) {
         webId = webId.split('?')[0];
     }
 
-    // obtaining id of the current user
+    // Obtaining id of the current user
     atmId = document
         .querySelector('#send-message-btn')
         .getAttribute('user-Data');
 
+    // Does not continue if no message is presented
     if (document.querySelector('#message').value.trim() === '') {
         return;
     }
-    // Emitting informtation
+    // Emitting/producting new informtation
     socket.emit('new message', {
         message: document.querySelector('#message').value,
         from: atmId,
@@ -30,15 +31,17 @@ document.querySelector('.send-message').addEventListener('submit', (event) => {
     });
 });
 
+// Socket on is taking the data from the emit
 socket.on('new message', (data) => {
-    // content of messages
+    // Content of messages
     const message = data.message;
+    //Sender and recipient IDs
     const fromUserId = data.from;
     const toUserId = data.to;
     const sendUserId = document
         .querySelector('#send-message-btn')
         .getAttribute('user-Data');
-
+    //Obtaining #ID of recipient from all the users
     let webUrlPage = document.location.href.split('/');
     webUrlPage = webUrlPage[webUrlPage.length - 1].split('#')[0];
 
@@ -46,12 +49,12 @@ socket.on('new message', (data) => {
         webUrlPage = webUrlPage.split('?')[0];
     }
 
-    // live interaction of messages between users
+    // Live interaction of messages between users
     const currentMsgList = document.querySelector('#recentUserList');
 
     if (fromUserId == sendUserId) {
         let toChatUser = document.querySelector(`#user-${toUserId}`);
-        // remove div before added to the webpage
+        // Remove div before added to the webpage
         if (toChatUser) {
             toChatUser.parentElement.removeChild(toChatUser);
         }
@@ -72,7 +75,7 @@ socket.on('new message', (data) => {
         if (fromChatUser) {
             fromChatUser.parentElement.removeChild(fromChatUser);
         }
-  
+        
         let newFromChatUser = document.createElement('li');
         newFromChatUser.setAttribute('id', `user-${fromUserId}`);
 
@@ -84,11 +87,11 @@ socket.on('new message', (data) => {
     }
 
 
-
+    // Live messaging
     if (
         (fromUserId == sendUserId && toUserId == webUrlPage) || (fromUserId == webUrlPage && toUserId == sendUserId)
     ) {
-        // received vs sent display
+        // Received vs sent display
         const classMsg = (sendUserId, fromUserId) => {
             if (sendUserId != fromUserId) {
                 return 'received';
@@ -113,7 +116,7 @@ socket.on('new message', (data) => {
 
         document.querySelector('#chatMsg').appendChild(liMsg);
 
-        // Clear messages
+        // Clear messages input
         document.querySelector('#message').value = '';
     }
     // Resettting atmId and webId once the message is sent and the page shows the message

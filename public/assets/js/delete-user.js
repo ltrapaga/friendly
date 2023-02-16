@@ -5,6 +5,7 @@ async function deleteUserForm() {
     document.querySelector('#random-btn').getAttribute('user-Data')
   );
 
+  // fetch request to delete the user
   const response = await fetch('/api/users/' + thisUserId, {
     method: 'delete',
     headers: { 'Content-Type': 'application/json' }

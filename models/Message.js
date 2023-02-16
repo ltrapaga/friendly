@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 
 class Message extends Model {}
 
+// Creates new JQuery object for messaes
 Message.init(
   {
     id: {

@@ -1,7 +1,7 @@
 const currentMsgList = document.querySelector('#recentUserList');
 
 async function showChatList() {
-    // get method for recent user
+    // fetch get method for recent user
     const response = await fetch('/api/messages/recent', { method: 'GET' });
     const data = await response.json();
 

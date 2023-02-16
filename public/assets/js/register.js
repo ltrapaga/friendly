@@ -11,6 +11,7 @@ async function createNewUser(event) {
     const bio = document.querySelector('#bio').value.trim();
 
 
+    // fetch post method to register user
     if (first_name && last_name && email && password) {
         const response = await fetch('/api/users', {
             method: 'post',
