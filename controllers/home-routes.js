@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, Message } = require('../models');
 const { getrecentUserchat } = require('../utils/filters');
 const { Op } = require('sequelize');
+const withAuth = require('../utils/auth');
 
 var sessionId;
 
