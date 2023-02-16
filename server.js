@@ -13,6 +13,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+//attached http server to the socket.io
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
@@ -38,6 +39,7 @@ app.use(routes);
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+//create a new connection between users
 io.on('connection', (socket) => {
   socket.on('new message', (message) => {
     io.emit('new message', message);
