@@ -1,48 +1,94 @@
-<header>
-  <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand"><strong>Logo</strong></a>
-    <div class="dropdown">
-      <div class="btn-group">
-        <button type="button" class="btn bd-outline">{{#with recentUserchat.thisUser}}
-          Welcome, {{capitalize_first_name first_name}}!
-          {{/with}}</button>
-        <button type="button" class="btn bd-outline dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          {{!-- <span class="visually-hidden">Toggle Dropdown</span> --}}
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li><a class="dropdown-item" href="/chat">Chat with someone new</a></li>
-          <li><a class="dropdown-item" id="logout-btn">Log out</a></li>
-          <li><a class="dropdown-item" id="delete-btn">Delete my account</a></li>
+<div class='logged-in'>
+  <!-- Header -->
+  <header>
+    <!-- Logo image -->
+    <div class='logo'>
+      <a href='/chat' type="button" class="btn">Home</a>
+    </div>
+        {{!-- Dashboard Welcome introduction --}}
+    <div class='welcome-info'>
+      {{#with recentUserchat.thisUser}}
+        Welcome, {{capitalize_first_name first_name}}
+      {{/with}}
+      <!-- Logout and Delete buttons -->
+      <div class='user-options'>
+        <ul>
+          <li><button id='logout-btn'>Sign Out</button></li>
+          <li><button id='delete-btn'>Delete My Account</button></li>
         </ul>
       </div>
-      </ul>
     </div>
-  </nav>
-</header>
+<!-- chat list during mobile view -->
+    <div class='open-toggle'>
+      <a href='#currenChatList'>
 
-<main>
+      </a>
+    </div>
+  </header>
+  
+  <main>
+    <!-- chat list of recent users -->
+    <div class='currentChat' id='currenChatList'>
+      <ul id='recentUserList'></ul>
+      <a href='#' class='close-toggle'><i class='fa-solid fa-xmark'></i></a>
+    </div>
+    <script src='/assets/js/recent.js'></script>
 
-
-<section class="gradient-custom">
-  <div class="container py-5">
-
-    <div class="row">
-
-      <div id="currentChatList" class="currentChat col-md-6 col-lg-5 col-xl-5 mb-4 mb-md-0">
-
-        <h5 class="font-weight-bold mb-3 text-center text-black">Current Conversations</h5>
-
-        <div class="card cd-custom">
-          <div class="card-body">
-            <ul id="recentUserList" class="list-unstyled mb-0">
-            </ul>
-          </div>
+    <!-- current chat list -->
+    <div class='current-chat'>
+      {{#if chatHome}}
+        <!-- rnadomize display when on home chat view -->
+        <div class='homeChat'>
+          {{#with recentUserchat.thisUser}}
+            <button class="btn btn-primary" id='random-btn' user-Data='{{id}}'>Talk with someone new!</button>
+          {{/with}}
+          <script src='/assets/js/random-chat.js'></script>
         </div>
-      </div>
-<script src='/assets/js/recent.js'></script>
-</section>
-</main>
+        
+      {{else}}
+        <!-- showing the conversation once interacting with the user -->
+        <!-- shows the information of the other user you are speaking to -->
+        <div class='userInform'>
+          <p class='inTheChat'>You are chatting with</p>
+          {{#with recentUserchat.chatRightNow as |user|}}
+            <h2 class='chatter-name'>{{capitalize_first_name user.first_name}}
+              {{capatilize_last_name user.last_name}}</h2>
+            <p class='userProGen'>{{user.pronouns}},
+              {{user.gender}},
+            </p>
+            <p class='userBiography'>{{user.bio}}</p>
+          {{/with}}
+        </div>
 
-<script src="/assets/js/logout.js"></script>
-<script src="/assets/js/delete-user.js"></script>
+        <!-- messages between users -->
+        <div class='messages'>
+          <ol id='chatMsg'>
+            {{#each messages}}
+              <li class='{{acquireChat sender_id ../recentUserchat.thisUser.id}}'>
+                <div class='message'>{{text_messages}}</div>
+                <p class='timeSent'>{{format_time createdAt}}</p>
+              </li>
+            {{/each}}
+          </ol>
+        </div>
+
+        <!-- sent messages -->
+        <form class='send-message'>
+          {{#with recentUserchat.chatRightNow as |user|}}
+            <input type='text' id='message'
+              placeholder='Send a message to {{user.first_name}}...' />
+          {{/with}}
+
+          {{#with recentUserchat.thisUser}}
+            <button class="btn btn-primary" type='submit' id='send-message-btn' user-Data='{{id}}'>Send</button>
+          {{/with}}
+        </form>
+        <script src='/assets/js/message.js'></script>
+        <script src='/assets/js/socket.js'></script>
+      {{/if}}
+    </div>
+  </main>
+</div>
+
+<script src='/assets/js/logout.js'></script>
+<script src='/assets/js/delete-user.js'></script>
