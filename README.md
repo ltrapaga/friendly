@@ -68,3 +68,6 @@ If you have any questions about the repository contact the contributors directly
 Calvin Chern: [Email](mailto:calvin.chern24@gmail.com) | [Github](<https://github.com/cchern>)
 
 Laura Trapaga: [Email](mailto:trapaga9@gmail.com) | [Github](<https://github.com/ltrapaga>)
+
+Laura Trapaga: [Email](mailto:jairomacassi@gmail.com) | [Github](<https://github.com/JairoPJM>)
+
