@@ -1,4 +1,4 @@
-// 
+//initilizing db 
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
