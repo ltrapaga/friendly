@@ -54,7 +54,6 @@ Contributors:
 
 * Calvin Chern
 * Jairo Macassi
-* Issa Diouf
 * Laura Trapaga
 
 ## Deployed Application
